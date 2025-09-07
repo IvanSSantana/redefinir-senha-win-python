@@ -5,6 +5,7 @@ from tkinter import ttk
 # Creating the window 
 root = Tk()
 root.title("Redefinir Senha")
+root.resizable(False, False) # Not allow full screen
 
 # Creating the principal frame (content group)
 frm = ttk.Frame(root, padding=10)
@@ -12,12 +13,17 @@ frm.grid()
 
 # Adding elements to the interface
 title = ttk.Label(frm, text="Insira sua nova senha abaixo!")
+title.config(font=("Helvetica", 16, "bold"))
 
-ttk.Label(frm, text="Senha").grid(column=0, row=1)
+passwordLabel = ttk.Label(frm, text="Senha")
+passwordLabel.config(font=("Arial", 14))
+
 passwordVar = StringVar()
 passwordInput = ttk.Entry(frm, show="*", textvariable=passwordVar)
 
-ttk.Label(frm, text="Confirmar Senha").grid(column=0, row=3)
+passwordConfirmLabel = ttk.Label(frm, text="Confirmar Senha")
+passwordConfirmLabel.config(font=("Arial", 14))
+
 passwordConfirmVar = StringVar()
 passwordConfirmInput = ttk.Entry(frm, show="*", textvariable=passwordConfirmVar)
 
@@ -25,12 +31,15 @@ messageText = StringVar()
 message = ttk.Label(frm, textvariable=messageText)
 
 def submit():
-	password = passwordVar.get()
+	password = passwordVar.get().strip()
 	passwordConfirm = passwordConfirmVar.get()
+
+	if len(password) == 0:
+		messageText.set("A senha não pode ser vazia.")
+		return
 
 	if passwordConfirm != password:
 		messageText.set("As senhas não conferem.")
-		
 		return
 
 	try:
@@ -53,6 +62,8 @@ passwordInput.grid(column=0, row=2)
 passwordConfirmInput.grid(column=0, row=4)
 submitButton.grid(column=0, row=5)
 message.grid(column=0, row=6)
+passwordLabel.grid(column=0, row=1)
+passwordConfirmLabel.grid(column=0, row=3)
 
 # Keep the display of interface
 root.mainloop()
