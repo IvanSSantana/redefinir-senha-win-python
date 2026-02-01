@@ -32,7 +32,7 @@ message = ttk.Label(frm, textvariable=messageText)
 
 def submit():
 	password = passwordVar.get().strip()
-	passwordConfirm = passwordConfirmVar.get()
+	passwordConfirm = passwordConfirmVar.get().strip()
 
 	if len(password) == 0:
 		messageText.set("A senha não pode ser vazia.")
