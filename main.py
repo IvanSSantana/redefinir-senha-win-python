@@ -1,6 +1,6 @@
-# FRONT-END (GRAPHIC INTERFACE)
 from tkinter import Tk, StringVar
 from tkinter import ttk
+import subprocess
 
 # Creating the window 
 root = Tk()
@@ -30,6 +30,7 @@ passwordConfirmInput = ttk.Entry(frm, show="*", textvariable=passwordConfirmVar)
 messageText = StringVar()
 message = ttk.Label(frm, textvariable=messageText)
 
+# Password Use Cases
 def submit():
 	password = passwordVar.get().strip()
 	passwordConfirm = passwordConfirmVar.get().strip()
@@ -43,8 +44,6 @@ def submit():
 		return
 
 	try:
-		import subprocess
-
 		# Get current windows user
 		userCmd = subprocess.run(['whoami'], capture_output=True, text=True, shell=True)
 		user = userCmd.stdout.strip().split("\\")[-1] 
@@ -56,7 +55,7 @@ def submit():
 
 submitButton = ttk.Button(frm, text="Redefinir senha", command=submit)
 
-# Position
+# Positions
 title.grid(column=0, row=0)
 passwordInput.grid(column=0, row=2)
 passwordConfirmInput.grid(column=0, row=4)

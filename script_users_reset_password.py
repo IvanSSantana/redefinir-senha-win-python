@@ -7,7 +7,7 @@ try:
 	usersCmd = subprocess.run(['wmic', 'useraccount', 'get', 'name'], capture_output=True, text=True, shell=True)
 	users = usersCmd.stdout.strip().splitlines()
 
-	for u in users:
+	for user in users:
 		subprocess.run(['net', 'user', user, password])
 
 	print("Senhas redefinida com sucesso!")
